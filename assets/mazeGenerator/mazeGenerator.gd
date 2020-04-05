@@ -2,13 +2,6 @@ extends GridMap
 
 var wallList = []
 var visitedCells = []
-var iterations = 0
-
-func generateCheckers(xSize, ySize):
-	for x in xSize:
-		for y in ySize:
-			if x % 2 != 0 or y % 2 != 0:
-				placeCell(x,y,0)
 
 func fillMaze(xSize, ySize):
 	for x in xSize:
@@ -37,6 +30,15 @@ func fillBorder(xSize, ySize):
 		placeCell(xSize, y, 0)
 	placeCell(-1, -1, 0)
 
+func eraseBorder(xSize, ySize):
+	for x in xSize+1:
+		placeCell(x, -1, -1)
+		placeCell(x, ySize, -1)
+	for y in ySize+1:
+		placeCell(-1, y, -1)
+		placeCell(xSize, y, -1)
+	placeCell(-1, -1, -1)
+
 
 func prim(xSize, ySize):
 	randomize()
@@ -45,8 +47,8 @@ func prim(xSize, ySize):
 	placeCell(startingPoint[0], startingPoint[1], -1)
 	for neighbor in getNeighbors(startingPoint[0], startingPoint[1]):
 		wallList.append(neighbor)
-	while !wallList.empty() and iterations < 5000:
-		#
+	while !wallList.empty():
+		#yield lets you see each iteration step by step
 		#yield(get_tree(), 'idle_frame')
 		var randomWall = wallList[randi() % wallList.size()]
 		var visitedNeighborCount = 0
@@ -57,23 +59,25 @@ func prim(xSize, ySize):
 			placeCell(randomWall[0], randomWall[1], -1)
 			visitedCells.append(randomWall)
 			for neighbor in getUnvisitedNeighbors(randomWall[0], randomWall[1]):
-				wallList.append(neighbor)
+				if get_cell_item(neighbor[0], 0, neighbor[1]) == 0:
+					wallList.append(neighbor)
 			wallList.erase(randomWall)
 		else:
 			wallList.erase(randomWall)
-		iterations += 1
-	fillBorder(xSize, ySize)
 		
 func generateMaze(x, y):
+	visitedCells = []
+	wallList = []
+	eraseBorder(x, y)
 	fillMaze(x, y)
 	prim(x, y)
+	fillBorder(x, y)
 
-func _ready():
-	generateMaze(20,20)
-	
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
+	if Input.is_action_just_pressed("ui_accept"):
+		generateMaze(20,20)
 
 func placeCell(x, y, id):
 	set_cell_item(x, 0, y, id, 0)

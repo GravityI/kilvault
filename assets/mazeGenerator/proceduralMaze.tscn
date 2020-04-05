@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/mazeGenerator/meshlibrary.tres" type="MeshLibrary" id=1]
+[ext_resource path="res://assets/mazeGenerator/mazeGenerator.gd" type="Script" id=2]
+
+[node name="ProceduralMaze" type="GridMap"]
+mesh_library = ExtResource( 1 )
+data = {
+"cells": PoolIntArray(  )
+}
+script = ExtResource( 2 )
+__meta__ = {
+"_editor_clip_": 0
+}
