@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/objects/cube.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/mazeGenerator/mazeGenerator.gd" type="Script" id=2]
+[ext_resource path="res://assets/mazeGenerator/meshlibrary.tres" type="MeshLibrary" id=3]
+
+[sub_resource type="Environment" id=1]
+ambient_light_color = Color( 1, 1, 1, 1 )
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource( 1 )
+
+[node name="cube" parent="." instance=ExtResource( 1 )]
+visible = false
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource( 3 )
+data = {
+"cells": PoolIntArray(  )
+}
+script = ExtResource( 2 )
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 0, 0 )
+}
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.011012, -0.999891, 0.00986162, 0, 0.00986222, 0.999951, -0.999939, -0.0110115, 0.000108603, 50, 98.833, 0 )

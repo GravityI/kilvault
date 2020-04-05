@@ -16,16 +16,8 @@ _global_script_class_icons={
 [application]
 
 config/name="Gavelia"
+run/main_scene="res://scenes/initial.tscn"
 config/icon="res://icon.png"
-
-[autoload]
-
-UserData="*res://addons/github-integration/scripts/user_data.gd"
-IconLoaderGithub="*res://addons/github-integration/scripts/IconLoaderGithub.gd"
-
-[editor_plugins]
-
-enabled=PoolStringArray( "github-integration" )
 
 [gdnative]
 
