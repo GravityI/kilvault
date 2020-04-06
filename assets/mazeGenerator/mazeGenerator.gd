@@ -7,6 +7,8 @@ func fillMaze(xSize, ySize):
 	for x in xSize:
 		for y in ySize:
 			placeCell(x, y, 0)
+			#Add Floor
+			set_cell_item(x, -1, y, 1)
 
 func generateStartingPoint(xRange, yRange):
 	return [randi() % xRange, randi() % yRange]
@@ -64,7 +66,18 @@ func prim(xSize, ySize):
 			wallList.erase(randomWall)
 		else:
 			wallList.erase(randomWall)
-		
+
+func secondPass(xSize, ySize):
+	for x in xSize:
+		for y in ySize:
+			if get_cell_item(x, 0, y) == 0:
+				var emptyNeighborCount = 0
+				for neighbor in getNeighbors(x, y):
+					if get_cell_item(neighbor[0], 0, neighbor[1]) == 0:
+						emptyNeighborCount += 1
+				if emptyNeighborCount == 0:
+					placeCell(x, y, -1)
+			
 func generateMaze(x, y):
 	visitedCells = []
 	wallList = []
@@ -72,12 +85,16 @@ func generateMaze(x, y):
 	fillMaze(x, y)
 	prim(x, y)
 	fillBorder(x, y)
+	secondPass(x, y)
+
+func _ready():
+	generateMaze(20, 20)
 
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
-	if Input.is_action_just_pressed("ui_accept"):
-		generateMaze(20,20)
+	if Input.is_action_just_pressed("jump"):
+		generateMaze(20, 20)
 
 func placeCell(x, y, id):
 	set_cell_item(x, 0, y, id, 0)

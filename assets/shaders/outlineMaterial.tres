@@ -5,5 +5,5 @@ flags_unshaded = true
 flags_disable_ambient_light = true
 params_cull_mode = 1
 params_grow = true
-params_grow_amount = 0.05
+params_grow_amount = 0.02
 albedo_color = Color( 0, 0, 0, 1 )

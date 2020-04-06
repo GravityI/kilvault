@@ -1,0 +1,7 @@
+[gd_resource type="SpatialMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://assets/textures/Gavelia Broadcast Entertainment Labs_512x512 Polycarbonate Cubic Compound (2).png" type="Texture" id=2]
+
+[resource]
+albedo_texture = ExtResource( 2 )
+uv1_triplanar = true
