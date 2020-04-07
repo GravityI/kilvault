@@ -1,14 +1,11 @@
 extends KinematicBody
 
-const fallingSpeed = 1
+const fallingSpeed = 9.8
 
 var moveSpeed = 3
 var side = 0
 var front = 0
 var up = 0
-var motion = Vector3()
-var snap = Vector3()
-var touchingFloor = false
 
 
 onready var camera = get_node("Camera")
@@ -33,11 +30,15 @@ func _process(delta):
 	if Input.is_action_just_released("ui_right"):
 		side += 1
 	
-	if Input.is_action_just_pressed("jump"):
-		up = 2
-		snap = Vector3()
+	if Input.is_action_pressed("jump") and is_on_floor():
+		up = 3
+		
+	if !is_on_floor():
+		up -= delta*fallingSpeed
+		
 	
-	up -= delta
-	motion = -Vector3(side*moveSpeed, -up, front*moveSpeed).rotated(Vector3.UP, camera.rotation.y)
-	move_and_slide(motion, -Vector3.UP)
+	var motion2d = Vector2(side, front).normalized() * moveSpeed
+	var motion = -Vector3(motion2d.x, -up, motion2d.y).rotated(Vector3.UP, camera.rotation.y)
+# warning-ignore:return_value_discarded
+	move_and_slide(motion, Vector3.UP)
 	

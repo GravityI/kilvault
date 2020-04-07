@@ -77,7 +77,16 @@ func secondPass(xSize, ySize):
 						emptyNeighborCount += 1
 				if emptyNeighborCount == 0:
 					placeCell(x, y, -1)
-			
+
+func setPlayerSpawn():
+	pass
+
+func setLevelEnd():
+	pass
+
+func setEnemySpawn():
+	pass
+
 func generateMaze(x, y):
 	visitedCells = []
 	wallList = []
@@ -93,8 +102,8 @@ func _ready():
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
-	if Input.is_action_just_pressed("jump"):
-		generateMaze(20, 20)
+#	if Input.is_action_just_pressed("jump"):
+#		generateMaze(20, 20)
 
 func placeCell(x, y, id):
 	set_cell_item(x, 0, y, id, 0)

@@ -14,7 +14,6 @@ environment = SubResource( 1 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( -1.62921e-07, -1, -1.62921e-07, 0, -1.62921e-07, 1, -1, 1.62921e-07, 2.65431e-14, 20, 50, 20 )
-current = true
 
 [node name="ProceduralMaze" parent="." instance=ExtResource( 2 )]
 data = {
