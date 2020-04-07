@@ -1,4 +1,4 @@
-#Kilvault Project Guidelines
+# Kilvault Project Guidelines
 
 Kilvault Project Goals
 ----------------------
