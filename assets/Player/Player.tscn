@@ -7,6 +7,7 @@
 extents = Vector3( 0.1, 1, 0.1 )
 
 [node name="Player" type="Spatial"]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
 
 [node name="KinematicBody" type="KinematicBody" parent="."]
 script = ExtResource( 2 )

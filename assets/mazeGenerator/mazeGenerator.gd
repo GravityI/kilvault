@@ -1,7 +1,16 @@
 extends GridMap
 
+signal canSpawn
+
 var wallList = []
 var visitedCells = []
+var playerSpawn = []
+var enemySpawns = []
+var levelEnd = []
+var spawnSignalArgs = []
+
+func placeCell(x, y, id):
+	set_cell_item(x, 0, y, id, 0)
 
 func fillMaze(xSize, ySize):
 	for x in xSize:
@@ -41,7 +50,6 @@ func eraseBorder(xSize, ySize):
 		placeCell(xSize, y, -1)
 	placeCell(-1, -1, -1)
 
-
 func prim(xSize, ySize):
 	randomize()
 	var startingPoint = generateStartingPoint(xSize, ySize)
@@ -78,32 +86,81 @@ func secondPass(xSize, ySize):
 				if emptyNeighborCount == 0:
 					placeCell(x, y, -1)
 
-func setPlayerSpawn():
-	pass
+func getRandomOpenCell(xSize, ySize):
+	var cell = [randi() % xSize, randi() % ySize]
+	if get_cell_item(cell[0], 0, cell[1]) != -1:
+		getRandomOpenCell(xSize, ySize)
+	return cell
 
-func setLevelEnd():
-	pass
+func setPlayerSpawn(xSize, ySize):
+	for x in xSize:
+		for y in ySize:
+			if get_cell_item(x, 0, y) == -1:
+				return [x, y]
 
-func setEnemySpawn():
-	pass
+func setLevelEnd(xSize, ySize):
+	for x in range(xSize, 1, -1):
+		for y in range(ySize, 1, -1):
+			if get_cell_item(x, 0, y) == -1:
+				return [x, y]
+
+func getOpenNeighbors(x, y):
+	var neighborCount = 0
+	for z in getNeighbors(x, y):
+		if get_cell_item(z[0], 0, z[1]) == -1:
+			neighborCount += 1
+	return neighborCount
+
+func getPossibleEnemySpawns(xSize, ySize):
+	var possibleEnemySpawns = []
+	for x in range(xSize - 3, 1, -1):
+		for y in range(ySize - 3, 1, -1):
+			if get_cell_item(x, 0, y) == -1 and getOpenNeighbors(x, y) > 3:
+				var neighbouringEnemy = false
+				for neighbor in getNeighbors(x, y):
+					if neighbor in possibleEnemySpawns:
+						neighbouringEnemy = true
+						break
+				if !neighbouringEnemy:
+					possibleEnemySpawns.append([x, y])
+	return possibleEnemySpawns
+
+func setEnemySpawns(xSize, ySize, quantity):
+	while enemySpawns.size() < quantity:
+		var spawn = getPossibleEnemySpawns(xSize, ySize)[randi() % getPossibleEnemySpawns(xSize, ySize).size()]
+		if !spawn in enemySpawns:
+			enemySpawns.append(spawn)
+			
 
 func generateMaze(x, y):
 	visitedCells = []
 	wallList = []
+	enemySpawns = []
+	#Standard Maze generator
 	eraseBorder(x, y)
 	fillMaze(x, y)
 	prim(x, y)
 	fillBorder(x, y)
+	#Game specific generator
 	secondPass(x, y)
+	playerSpawn = setPlayerSpawn(x, y)
+	levelEnd = setLevelEnd(x, y)
+	placeCell(playerSpawn[0], playerSpawn[1], 2)
+	placeCell(levelEnd[0], levelEnd[1], 3)
+	setEnemySpawns(x, y, 10)
+	var enemyList = []
+	for enemy in enemySpawns:
+		enemyList.append(map_to_world(enemy[0], 0, enemy[1]))
+	spawnSignalArgs = [map_to_world(playerSpawn[0], 0, playerSpawn[1]), map_to_world(levelEnd[0], 0, levelEnd[1]), enemyList]
+	emit_signal("canSpawn", spawnSignalArgs)
+	
 
 func _ready():
+	connect("canSpawn", $"../entitiesManager", "_onMapGenerated")
 	generateMaze(20, 20)
 
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
-#	if Input.is_action_just_pressed("jump"):
-#		generateMaze(20, 20)
-
-func placeCell(x, y, id):
-	set_cell_item(x, 0, y, id, 0)
+	if Input.is_action_just_pressed("generateMap"):
+		generateMaze(20, 20)
