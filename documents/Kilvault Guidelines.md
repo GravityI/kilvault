@@ -29,11 +29,13 @@ Kilvault Narrative Guidelines
 
 **Confirmed**
 - Sci-fi World
-- Narrator
-- Sports/Reality Show setting with a Scientific/Corporate subtheme
+- Scientific/Corporate theme
 
 **Maybe?** (Same as design constraints)
 - Branching narrative
+- Sports/Reality Show setting
+- Narrator
+- Prison
 
 Kilvault Marketing Strategy
 ---------------------------

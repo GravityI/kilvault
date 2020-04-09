@@ -1,7 +1,7 @@
 extends Node
 
 const player = preload("res://assets/Player/Player.tscn")
-const enemy = preload("res://assets/models/cube.glb")
+const enemy = preload("res://assets/objects/cube.tscn")
 #const endTeleporter = load()
 
 func _onMapGenerated(args):
