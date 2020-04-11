@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/materials/wallCube.tres" type="Material" id=1]
 [ext_resource path="res://assets/materials/floorCube.tres" type="Material" id=2]
 [ext_resource path="res://assets/textures/Gavelia Broadcast Entertainment Labs_512x512 Polycarbonate Cubic Compound (2).png" type="Texture" id=3]
+[ext_resource path="res://scripts/endTeleporter.gd" type="Script" id=4]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -31,7 +32,7 @@ albedo_color = Color( 0.282353, 0.992157, 0.054902, 1 )
 uv1_triplanar = true
 
 [sub_resource type="SpatialMaterial" id=7]
-albedo_color = Color( 0.901961, 0.0901961, 0.909804, 1 )
+albedo_color = Color( 0.258824, 0.0352941, 0.262745, 1 )
 uv1_triplanar = true
 
 [sub_resource type="SpatialMaterial" id=8]
@@ -86,15 +87,14 @@ mesh = SubResource( 3 )
 material/0 = SubResource( 4 )
 
 [node name="Cube3" type="MeshInstance" parent="."]
-visible = false
 mesh = SubResource( 1 )
 material/0 = SubResource( 7 )
 
-[node name="StaticBody" type="StaticBody" parent="Cube3"]
+[node name="Area" type="Area" parent="Cube3"]
+script = ExtResource( 4 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Cube3/StaticBody"]
+[node name="CollisionShape" type="CollisionShape" parent="Cube3/Area"]
 shape = SubResource( 5 )
-disabled = true
 
 [node name="MeshInstance" type="MeshInstance" parent="Cube3"]
 mesh = SubResource( 3 )
@@ -114,3 +114,4 @@ disabled = true
 [node name="MeshInstance" type="MeshInstance" parent="Cube4"]
 mesh = SubResource( 3 )
 material/0 = SubResource( 4 )
+[connection signal="body_entered" from="Cube3/Area" to="Cube3/Area" method="_on_Area_body_entered"]

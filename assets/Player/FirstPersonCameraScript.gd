@@ -38,7 +38,7 @@ func _process(delta):
 	if gun.translation.z > -0.3:
 		gun.translation.z = lerp(gun.translation.z, -0.3, 0.1)
 	
-	if playerBody.motion.x + playerBody.motion.z != 0:
+	if playerBody.motion.x !=0 or playerBody.motion.z != 0:
 		gun.translation.y = lerp(gun.translation.y, -0.3, 0.1)
 #		gun.rotation_degrees.y = lerp(gun.rotation_degrees.y, -180, 0.1)
 	else:
@@ -77,6 +77,7 @@ func checkRayCollision():
 	if collider != null:
 		if collider.is_in_group("enemy"):
 			print("Shot Enemy")
+			collider.queue_free()
 		else:
 			print("Missed")
 	else:

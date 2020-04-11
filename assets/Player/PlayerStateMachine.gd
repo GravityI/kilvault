@@ -19,17 +19,17 @@ func _state_logic(delta):
 func _get_transition(delta):
 	match state:
 		states.IDLE:
-			if playerBody.motion2d.x + playerBody.motion2d.y != 0 and playerBody.moveSpeed < 5:
+			if playerBody.motion2d.x != 0 or playerBody.motion2d.y != 0 and playerBody.moveSpeed < 5:
 				return states.WALK
-			elif playerBody.motion2d.x + playerBody.motion2d.y != 0 and Input.is_action_pressed("sprint"):
+			elif playerBody.motion2d.x != 0 or playerBody.motion2d.y != 0  and Input.is_action_pressed("sprint"):
 				return states.SPRINT
 		states.WALK:
-			if playerBody.motion2d.x + playerBody.motion2d.y == 0:
+			if playerBody.motion2d.x == 0 and playerBody.motion2d.y == 0:
 				return states.IDLE
 			elif Input.is_action_pressed("sprint"):
 				return states.SPRINT
 		states.SPRINT:
-			if playerBody.motion2d.x + playerBody.motion2d.y == 0:
+			if playerBody.motion2d.x == 0 and playerBody.motion2d.y == 0:
 				return states.IDLE
 			elif !Input.is_action_pressed("sprint"):
 				return states.WALK

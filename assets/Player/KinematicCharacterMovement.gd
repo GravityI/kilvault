@@ -63,19 +63,19 @@ func _process(delta):
 		else: moveSpeed = 1.5
 		aiming = false
 	
-	if (!Input.is_action_pressed("crouch") and stateMachine.state != stateMachine.states.SPRINT) or (Input.is_action_pressed("crouch") and stateMachine.state == stateMachine.states.SPRINT):
-		if !aiming: moveSpeed = 1.5
-		else: moveSpeed = 1
-		crouching = true
-	elif !Input.is_action_pressed("crouch") and stateMachine.state != stateMachine.states.SPRINT:
-		if !aiming: moveSpeed = 3
-		else: moveSpeed = 1.5
-		crouching = false
+#	if (!Input.is_action_pressed("crouch") and stateMachine.state != stateMachine.states.SPRINT) or (Input.is_action_pressed("crouch") and stateMachine.state == stateMachine.states.SPRINT):
+#		if !aiming: moveSpeed = 1.5
+#		else: moveSpeed = 1
+#		crouching = true
+#	elif !Input.is_action_pressed("crouch") and stateMachine.state != stateMachine.states.SPRINT:
+#		if !aiming: moveSpeed = 3
+#		else: moveSpeed = 1.5
+#		crouching = false
 		
 	if !is_on_floor():
 		up -= delta*fallingSpeed
 	
-	currentMoveSpeed = lerp(currentMoveSpeed, moveSpeed, 0.1)
+	currentMoveSpeed = moveSpeed
 	
 	motion2d = Vector2(side, front).normalized() * currentMoveSpeed
 	motion = Vector3(motion2d.x, up, motion2d.y).rotated(Vector3.UP, camera.rotation.y)
