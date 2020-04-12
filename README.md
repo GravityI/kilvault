@@ -20,8 +20,8 @@ Besides the State Machine class and the Enemy AI script (which belong to [GameEn
 
 All the art assets used are licensed under CC0, which means that you can use them without the need for credits. The crosshairs were made by [Kenney](https://www.kenney.nl).
 
-You can check my progress and planned features through [Kilvault's Trello Board](https://trello.com/b/ksxdVBMS/gavelia) and also watch weekly devlogs on my [YouTube Channel](https://www.youtube.com/channel/UC7Lt21IYfoJY_aU73R6wxHg/featured).
+You can check my progress and planned features through [Kilvault's Trello Board](https://trello.com/b/ksxdVBMS/gavelia) and also read weekly devlogs on my [Blog](https://kagerowo.wordpress.com).
 
 ## Contact
 
-If you have any doubts or want to contact me about something, feel free to comment on the YouTube videos, send me an email at icaropeixoto7@gmail.com or send me a DM on [Twitter](https://twitter.com/peixoto_icaro). I'll be happy to help!
+If you have any doubts or want to contact me about something, feel free to send me an email at icaropeixoto7@gmail.com or send me a DM on [Twitter](https://twitter.com/peixoto_icaro). I'll be happy to help!
