@@ -9,7 +9,6 @@
 [node name="Spatial" type="Spatial"]
 
 [node name="Area" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.73928, 0, 0 )
 script = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": ""
