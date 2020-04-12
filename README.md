@@ -18,7 +18,7 @@ If you're on Linux or MacOs, I have no idea of how things work on them, but ther
 
 Besides the State Machine class and the Enemy AI script (which belong to [GameEndeavor](https://www.youtube.com/channel/UCLweX1UtQjRjj7rs_0XQ2Eg) and [CodeWithTom](https://www.youtube.com/channel/UCdU9e4eNsJif0rBrBiYRb5g), respectively), all scripts are licensed under the MIT license, which means you're free to copy and modify them as long as you give me credit (Kagerowo) and/or link to this page.
 
-All the art assets used are licensed under CC0, which means that you can use them without the need for credits. The crosshairs were made by Kenney [Kenney](https://www.kenney.nl).
+All the art assets used are licensed under CC0, which means that you can use them without the need for credits. The crosshairs were made by [Kenney](https://www.kenney.nl).
 
 You can check my progress and planned features through [Kilvault's Trello Board](https://trello.com/b/ksxdVBMS/gavelia) and also watch weekly devlogs on my [YouTube Channel](https://www.youtube.com/channel/UC7Lt21IYfoJY_aU73R6wxHg/featured).
 
