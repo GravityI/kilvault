@@ -18,9 +18,10 @@ func _state_logic(delta):
 		states.SEARCH:
 			if target:
 				var result = spaceState.intersect_ray($"..".global_transform.origin, target.global_transform.origin)
-				if result.collider.is_in_group("player"):
-					$"..".look_at(Vector3(target.global_transform.origin.x, 0.5 , target.global_transform.origin.z), Vector3.UP)
-					$"..".move_and_slide((target.global_transform.origin - $"..".global_transform.origin).normalized() * 1, Vector3.UP)
+				if result.size() > 0:
+					if result.collider.is_in_group("player"):
+						$"..".look_at(Vector3(target.global_transform.origin.x, 0.5 , target.global_transform.origin.z), Vector3.UP)
+						$"..".move_and_slide((target.global_transform.origin - $"..".global_transform.origin).normalized() * 1, Vector3.UP)
 func _get_transition(delta):
 	return null
 

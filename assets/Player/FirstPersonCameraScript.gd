@@ -37,10 +37,11 @@ func _process(delta):
 	
 	if gun.translation.z > -0.3:
 		gun.translation.z = lerp(gun.translation.z, -0.3, 0.1)
-	
+		
+		
 	if playerBody.motion.x !=0 or playerBody.motion.z != 0:
 		gun.translation.y = lerp(gun.translation.y, -0.3, 0.1)
-#		gun.rotation_degrees.y = lerp(gun.rotation_degrees.y, -180, 0.1)
+#		gun.rotation_degrees.y = lerp_angle(gun.rotation_degrees.y, -180, 0.1)
 	else:
 		gun.translation.y = lerp(gun.translation.y, -0.22, 0.1)
 		gun.rotation_degrees.y = lerp_angle(gun.rotation_degrees.y, -180, 0.1)
@@ -65,7 +66,7 @@ func _input(event):
 		var amount = event.relative * sensitivity * time
 		
 		rotation_degrees.x -= amount.y
-		rotation_degrees.x = clamp(rotation_degrees.x, -60, 60)
+		rotation_degrees.x = clamp(rotation_degrees.x, -70, 70)
 		rotation_degrees.y -= amount.x
 		transform = transform.orthonormalized()
 

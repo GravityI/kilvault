@@ -21,26 +21,28 @@ func _process(delta):
 	#Input Handling
 	if Input.is_action_just_pressed("ui_up"):
 		front += 1
-		pressedOnce = true
+
 	if Input.is_action_just_pressed("ui_down"):
 		front -= 1
-		pressedOnce = true
+
 	if Input.is_action_just_pressed("ui_left"):
 		side += 1
-		pressedOnce = true
+
 	if Input.is_action_just_pressed("ui_right"):
 		side -= 1
-		pressedOnce = true
+
+	if Input.is_action_just_released("ui_up"):
+		front -= 1
+	if Input.is_action_just_released("ui_down"):
+		front += 1
+	if Input.is_action_just_released("ui_left"):
+		side -= 1
+	if Input.is_action_just_released("ui_right"):
+		side += 1
 	
-	if pressedOnce:
-		if Input.is_action_just_released("ui_up"):
-			front -= 1
-		if Input.is_action_just_released("ui_down"):
-			front += 1
-		if Input.is_action_just_released("ui_left"):
-			side -= 1
-		if Input.is_action_just_released("ui_right"):
-			side += 1
+	if !(Input.is_action_pressed("ui_up") or Input.is_action_pressed("ui_down") or Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")):
+		front = 0
+		side = 0
 		
 	if Input.is_action_pressed("jump") and is_on_floor():
 		up = 3
