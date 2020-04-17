@@ -50,21 +50,21 @@ func _process(delta):
 	if Input.is_action_pressed("aim") and stateMachine.state != stateMachine.states.SPRINT:
 		gun.translation.x = lerp(gun.translation.x, 0, 0.1)
 		camera.fov = lerp(camera.fov, 50, 0.1)
-		if !crouching: moveSpeed = 1.5
-		else: moveSpeed = 1
+		moveSpeed = 1
 		aiming = true
+		$"Camera/CanvasLayer/Crosshair".hide()
 	elif (Input.is_action_pressed("aim") and stateMachine.state == stateMachine.states.SPRINT):
 		gun.translation.x = lerp(gun.translation.x, 0.3, 0.1)
 		camera.fov = lerp(camera.fov, 70, 0.1)
 		moveSpeed = 5
 		aiming = false
+		$"Camera/CanvasLayer/Crosshair".show()
 	elif (!Input.is_action_pressed("aim") and stateMachine.state != stateMachine.states.SPRINT):
 		gun.translation.x = lerp(gun.translation.x, 0.3, 0.1)
 		camera.fov = lerp(camera.fov, 70, 0.1)
-		if !crouching: moveSpeed = 3
-		else: moveSpeed = 1.5
+		moveSpeed = 1.5
 		aiming = false
-	
+		$"Camera/CanvasLayer/Crosshair".show()
 #	if (!Input.is_action_pressed("crouch") and stateMachine.state != stateMachine.states.SPRINT) or (Input.is_action_pressed("crouch") and stateMachine.state == stateMachine.states.SPRINT):
 #		if !aiming: moveSpeed = 1.5
 #		else: moveSpeed = 1
